@@ -1,10 +1,10 @@
-# se importa render_template
 from flask import Flask, request, make_response, redirect, render_template
 
+fruits = ['banana', 'apple', 'orange', 'cherry']
 
 app = Flask(__name__)
 
-# ruta raiz
+
 @app.route('/')
 def index():
     user_ip = request.remote_addr
@@ -14,10 +14,13 @@ def index():
     return response
 
 
-
-# ruta hello, donde ahora en vez de retorna una cadena, retornamos el template: hello.html
-# tambien enviamos 
+# se crea un diccionario con los parametros que vamos a pasar
+# la notacion **context, nos permite expandir el diccionario
 @app.route('/hello')
 def hello():
     user_ip = request.cookies.get('user_ip')
-    return render_template('hello.html', user_ip=user_ip)
+    context ={
+        'user_ip':user_ip,
+        'fruits':fruits,
+    }
+    return render_template('hello.html', **context )
