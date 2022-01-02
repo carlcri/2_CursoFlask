@@ -1,23 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mi proyecto</title>
-</head>
-<body>
+<!-- se hereda del base.html -->
+{% extends 'base.html'%}
+
+<!-- importamos macros.html como una sola variable llamada macros-->
+<!-- el macro se usa en el ciclo for -->
+{% import 'macros.html' as macros %}
+
+<!-- super() permite anadir esta parte al bloque de titulo sin sobreescribir lo que viene del base.html-->
+{% block title%}
+    {{super()}}
+    Hello 
+{% endblock%}
+
+<!-- el bloque content debe existir tambien en el base.html para que pueda renderiar la informacion aqui mostrada-->
+{% block content%}
     {% if user_ip %}
         <h1>Hello world, your IP is {{user_ip}}</h1>
     {% else %}
         <a href="{{url_for('index')}}">Ir a inicio</a>
     {% endif %}
-
-
-    <ul>
-        {% for fruit in fruits %}
-            <li>{{fruit}}</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+    {% for fruit in fruits %}
+        {{macros.render_fruit(fruit)}}
+    {% endfor %}
+{% endblock%}
