@@ -11,13 +11,20 @@
         <h1>Hello world, your IP is {{user_ip}}</h1>
     {% else %}
         <a href="{{url_for('index')}}">Ir a inicio</a>
+        
+        <ul>
+            {% for fruit in fruits %}
+                <li>{{fruit}}</li>
+            {% endfor %}
+        </ul>
+    
+
     {% endif %}
 
-
     <ul>
-        {% for fruit in fruits %}
-            <li>{{fruit}}</li>
-        {% endfor %}
+        {% for item in python_dev_list %}
+            <li>{{item}}</li>
+        {% endfor%}
     </ul>
 </body>
 </html>
