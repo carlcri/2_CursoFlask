@@ -24,3 +24,17 @@ def hello():
         'fruits':fruits,
     }
     return render_template('hello.html', **context )
+
+@app.route('/error')
+def internal_error():
+    1/0
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html', error=error)
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return render_template('500.html', error=error)
