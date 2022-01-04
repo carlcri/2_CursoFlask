@@ -18,7 +18,21 @@
     {% else %}
         <a href="{{url_for('index')}}">Ir a inicio</a>
     {% endif %}
+
+    <div class='container'>
+        
+        <!-- Esta forma es un poco mas complicada, solo la mostramos a manera de ejemplo-->
+        <form action="{{ url_for('hello')}}" method="POST">
+            {{login_form.username.label}}
+            {{login_form.username}}
+        </form>
+    </div>
+
+
     {% for fruit in fruits %}
         {{macros.render_fruit(fruit)}}
     {% endfor %}
+
+    
+
 {% endblock%}
