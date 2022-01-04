@@ -5,6 +5,9 @@
 <!-- el macro se usa en el ciclo for -->
 {% import 'macros.html' as macros %}
 
+<!--17/36 implementacion de Flask-Bootstrap y Flask-WTF -->
+{% import 'bootstrap/wtf.html' as wtf %}
+
 <!-- super() permite anadir esta parte al bloque de titulo sin sobreescribir lo que viene del base.html-->
 {% block title%}
     {{super()}}
@@ -20,12 +23,7 @@
     {% endif %}
 
     <div class='container'>
-        
-        <!-- Esta forma es un poco mas complicada, solo la mostramos a manera de ejemplo-->
-        <form action="{{ url_for('hello')}}" method="POST">
-            {{login_form.username.label}}
-            {{login_form.username}}
-        </form>
+        {{wtf.quick_form(login_form)}}
     </div>
 
 
