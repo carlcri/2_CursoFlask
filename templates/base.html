@@ -1,24 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% extends 'bootstrap/base.html' %}
+
+<!-- heredamos del base.html de bootstrap sin sobrescribirlo -->
+{% block head %}
+    {{super()}}
+<!-- mejor dejar esto en una sola linea es mas legible-->   
     <title>
-        {% block title%}
-            Su madre patria |
-        {% endblock%}
+        {% block title %} Su madre patria | {% endblock %}
     </title>
+    
+    <!-- archivo de estilos-->
     <link rel='stylesheet' href="{{ url_for('static', filename='css/main.css')}}">
-</head>
-<body>
-    <!-- incluimos la barra de navegacion -->
-    <header>
+{% endblock %}
+
+
+{% block body %}
+    {% block navbar %}
         {% include 'navbar.html' %}
-    </header>
+    {% endblock %}
+
+    {% block content%}{% endblock%}
+{% endblock %}
 
 
-    {% block content%}    
-    {% endblock%}
-</body>
-</html>
+
+
+

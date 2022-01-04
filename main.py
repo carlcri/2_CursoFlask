@@ -1,8 +1,12 @@
 from flask import Flask, request, make_response, redirect, render_template
+from flask_bootstrap import Bootstrap
 
 fruits = ['banana', 'apple', 'orange', 'cherry']
 
+# se crea una instancia de Bootstrap y se le pasa como parametro una aplicacion de Flask
 app = Flask(__name__)
+bootstrap = Bootstrap(app)
+
 
 
 @app.route('/')
@@ -14,8 +18,6 @@ def index():
     return response
 
 
-# se crea un diccionario con los parametros que vamos a pasar
-# la notacion **context, nos permite expandir el diccionario
 @app.route('/hello')
 def hello():
     user_ip = request.cookies.get('user_ip')
