@@ -1,23 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mi proyecto</title>
-</head>
-<body>
+{% extends 'base.html'%}
+
+
+{% block title%}
+    {{super()}}
+    Hello
+{% endblock %}
+
+
+
+
+{% block content %}
+        
     {% if user_ip %}
         <h1>Hello world, your IP is {{user_ip}}</h1>
     {% else %}
-        <a href="{{url_for('index')}}">Ir a inicio</a>
-        
-        <ul>
-            {% for fruit in fruits %}
-                <li>{{fruit}}</li>
-            {% endfor %}
-        </ul>
+    <a href="{{url_for('index')}}">Ir a inicio</a>
     
+    <ul>
+        {% for fruit in fruits %}
+            <li>{{fruit}}</li>
+        {% endfor %}
+    </ul>
+
 
     {% endif %}
 
@@ -26,5 +30,7 @@
             <li>{{item}}</li>
         {% endfor%}
     </ul>
-</body>
-</html>
+
+
+{% endblock %}
+
