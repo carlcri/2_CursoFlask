@@ -1,4 +1,5 @@
 {% extends 'base.html'%}
+{% import 'bootstrap/wtf.html' as wtf %}
 
 {% block title %}
     {{super()}}
@@ -7,5 +8,17 @@
 
 
 {% block content %}
-    <h1>Bienvenidos a los atravesados</h1>
+    <h1>Bienvenido a los atravesados</h1>
+
+    <div class="container">
+        {{wtf.quick_form(login_form)}}
+    </div>
+
+    <ul>
+        {% for fruit in fruits%}
+            <li>{{fruit}}</li>
+        {% endfor %}
+
+    </ul>
+
 {% endblock %}

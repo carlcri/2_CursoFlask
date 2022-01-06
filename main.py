@@ -1,7 +1,7 @@
 from flask import Flask, request, make_response, redirect, render_template, session
-
-from data_workers import DATA
 from flask_bootstrap import Bootstrap
+from data_workers import DATA
+from loginform import LoginForm
 
 fruits = ['banana', 'apple', 'orange', 'cherry']
 
@@ -9,7 +9,7 @@ app = Flask(__name__)
 bootstrap = Bootstrap(app)
 
 # esta propiedad configura la llave secreta
-app.config['SECRET_KEY']='ubuntu'
+app.config['SECRET_KEY']='anything'
 
 @app.route('/')
 def index():
@@ -41,12 +41,17 @@ def hello():
         'fruits':fruits,
         'python_dev_list':python_dev_list,
     }
-    return render_template('hello.html', **context )
+    return render_template('hello.html', **context)
 
 
 @app.route('/atravesados')
 def atravesados():
-    return render_template('atravesados.html')
+    login_form = LoginForm()
+    context = {
+        'fruits':fruits,
+        'login_form':login_form,
+    }
+    return render_template('atravesados.html', **context)
 
 
 @app.route('/error')
