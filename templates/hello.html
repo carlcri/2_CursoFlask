@@ -3,7 +3,7 @@
 
 {% block title%}
     {{super()}}
-    Hello
+    Hello 
 {% endblock %}
 
 
@@ -13,6 +13,7 @@
         
     {% if user_ip %}
         <h1>Hello world, your IP is {{user_ip}}</h1>
+        <h2>Your user name is {{user_name}}</h2>
     {% else %}
     <a href="{{url_for('index')}}">Ir a inicio</a>
     
@@ -30,6 +31,8 @@
             <li>{{item}}</li>
         {% endfor%}
     </ul>
+
+ 
 
 
 {% endblock %}
