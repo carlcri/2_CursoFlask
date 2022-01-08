@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, redirect, render_template, session, url_for
+from flask import Flask, request, make_response, redirect, render_template, session, url_for, flash
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms.fields import PasswordField, StringField, SubmitField
@@ -11,10 +11,9 @@ fruits = ['banana', 'apple', 'orange', 'cherry']
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 
-# esta propiedad permite configurar una llave secreta
 app.config['SECRET_KEY'] = 'password'
 
-# extendemos la clase FlaskForm. Lo que esta entre parentesis se concoce como etiquetas.
+
 class LoginForm(FlaskForm):
     username = StringField('Nombre de Usuario', validators=[DataRequired()])
     password = PasswordField('contrasena', validators=[DataRequired()])
@@ -48,6 +47,8 @@ def hello():
     if login_form.validate_on_submit():
         user_name = login_form.username.data
         session['user_name'] = user_name
+
+        flash('nombre de usuario registrado con exito')
 
         return redirect(url_for('index'))
 
