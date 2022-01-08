@@ -47,7 +47,8 @@ def hello():
     if login_form.validate_on_submit():
         user_name = login_form.username.data
         session['user_name'] = user_name
-
+        
+        # desplega un mensaje de tipo flash
         flash('nombre de usuario registrado con exito')
 
         return redirect(url_for('index'))
