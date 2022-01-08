@@ -1,4 +1,4 @@
-from flask import Flask, request, make_response, redirect, render_template, session
+from flask import Flask, request, make_response, redirect, render_template, session, url_for
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms.fields import PasswordField, StringField, SubmitField
@@ -28,23 +28,30 @@ def index():
 
     # Guardamos el user_ip en session
     session['user_ip'] = user_ip
-    
-    #response.set_cookie('user_ip', user_ip)
 
     return response
 
 
-@app.route('/hello')
+@app.route('/hello', methods=['GET', 'POST'])
 def hello():
+    # obteniendo user_ip y user_name directamente de la session 
     user_ip = session.get('user_ip')
-    #user_ip = request.cookies.get('user_ip')
+    user_name = session.get('user_name')
     login_form = LoginForm()
+
     context ={
         'user_ip':user_ip,
+        'user_name':user_name,
         'fruits':fruits,
         'login_form': login_form,  
     }
-    return render_template('hello.html', **context )
+    if login_form.validate_on_submit():
+        user_name = login_form.username.data
+        session['user_name'] = user_name
+
+        return redirect(url_for('index'))
+
+    return render_template('hello.html', **context)
 
 @app.route('/error')
 def internal_error():

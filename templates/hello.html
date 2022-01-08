@@ -16,8 +16,13 @@
 
 <!-- el bloque content debe existir tambien en el base.html para que pueda renderiar la informacion aqui mostrada-->
 {% block content%}
+
+    {% if user_name %}
+        <h1>your user: {{user_name | capitalize}}</h1>
+    {% endif %} 
+
     {% if user_ip %}
-        <h1>Hello world, your IP is {{user_ip}}</h1>
+        <h3>Hello world, your IP is {{user_ip}}</h3>
     {% else %}
         <a href="{{url_for('index')}}">Ir a inicio</a>
     {% endif %}
