@@ -28,3 +28,11 @@ Le habilite la funcionalidad *Automatic Deploys From* para que cada vez que actu
 Entender como FLASK usa las *Request* y *Responses* para poder regresar la infomracion solicitada. 
 
 Se añadieron algunas lineas de codigo a main.py
+
+## Basico ciclo request and response, dos rutas, una raiz y otra Welcome
+
+Para visualizar las cookies en EDGE hay que ir a herramientas de desarrollador dentro del *browser*
+
+<img src="https://i.imgur.com/UD7vjdj.jpg" width="60%"/>
+
+Y dento de estra cruzecita buscar *Aplicacion*, y luego *Almacenamiento*
