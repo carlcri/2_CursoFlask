@@ -14,13 +14,15 @@ def index():
     user_ip = request.remote_addr
     response = make_response(redirect('/welcome'))
     response.set_cookie('user_ip', user_ip)
+    
     return response
+
 
 # Ruta Welcome
 @app.route('/welcome')
 def welcome():
     user_ip = request.cookies.get('user_ip')
-    return f'Welcome your ip is: {user_ip}'        
+    return f'Welcome your IP is: {user_ip}'        
 
 
 if __name__ == '__main__':
