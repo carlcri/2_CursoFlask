@@ -14,8 +14,9 @@
         <ul>
             {% for fruit in fruits %}
                 <li>{{fruit}}</li>
-            {% endfor %}
+            {% endfor %}   
         </ul>
+        <a href="{{url_for('querries')}}">Ir a Consultas</a>
     {% else %}
         <a href="{{url_for('index')}}">Ir a inicio</a>
         <h3>Cookie Not Found</h3>

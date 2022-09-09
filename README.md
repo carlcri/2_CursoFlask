@@ -109,3 +109,10 @@ Para todos los templates, Flask pone a nuestra disposicion una variable que se l
         {% endif %}
 
 Como vez index es la funcion que pertenece a la ruta raiz, y la que guarda la ip del usuario.
+
+
+## Hago una busqueda y mostrarla en una ruta
+
+Se realiza una busqueda estatica en *DataWorkers.py*, y se renderiza en la ruta *welcome*. Mira que se usa para la busqueda, funciones de orden superior.
+
+Cada vez que se refresque la pagina, mostrara una busqueda diferente.
