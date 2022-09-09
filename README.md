@@ -113,6 +113,6 @@ Como vez index es la funcion que pertenece a la ruta raiz, y la que guarda la ip
 
 ## Hago una busqueda y mostrarla en una ruta
 
-Se realiza una busqueda estatica en *DataWorkers.py*, y se renderiza en la ruta *welcome*. Mira que se usa para la busqueda, funciones de orden superior.
+Se realiza una busqueda estatica en *DataWorkers.py*, y se renderiza en la ruta *welcome*. Mira que se usa para la busqueda, funciones de orden superior-*high orfer functions*
 
 Cada vez que se refresque la pagina, mostrara una busqueda diferente.
