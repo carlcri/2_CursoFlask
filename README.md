@@ -21,3 +21,10 @@ Le habilite la funcionalidad *Automatic Deploys From* para que cada vez que actu
 
 **https://miappflask.herokuapp.com/**
 
+## Usando Request Para Averiguar mi IP.
+
+<img src="https://i.imgur.com/FbP6nZ8.jpg" width="100%"/>
+
+Entender como FLASK usa las *Request* y *Responses* para poder regresar la infomracion solicitada. 
+
+Se añadieron algunas lineas de codigo a main.py

@@ -11,7 +11,7 @@ PORT = 5000
 @app.route('/')
 def index():
     user_ip = request.remote_addr
-    return f'Hello your ip is: {user_ip}'
+    return f'hello your ip is: {user_ip}'
 
 if __name__ == '__main__':
     app.run(port=PORT, debug=DEBUG)
