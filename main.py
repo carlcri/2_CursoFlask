@@ -8,6 +8,8 @@ DEBUG = False
 PORT = 5000
 
 
+fruits = ['Banana', 'Apple', 'Orange', 'Cherry']
+
 # Ruta Raiz
 @app.route('/')
 def index():
@@ -22,7 +24,10 @@ def index():
 @app.route('/welcome')
 def welcome():
     user_ip = request.cookies.get('user_ip')
-    return render_template('welcome.html', user_ip=user_ip)       
+    context = {'user_ip':user_ip,
+                'fruits':fruits,}
+
+    return render_template('welcome.html', **context)       
 
 
 if __name__ == '__main__':

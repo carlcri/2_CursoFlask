@@ -1,1 +1,24 @@
-<h1>WELCOME, your IP is {{user_ip}}</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+</head>
+<body>
+    <h1>Welcome Page</h1>
+
+    {% if user_ip %}
+        <h3>Your IP is {{user_ip}}</h3>
+        <ul>
+            {% for fruit in fruits %}
+                <li>{{fruit}}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <a href="{{url_for('index')}}">Ir a inicio</a>
+        <h3>Cookie Not Found</h3>
+    {% endif %}
+</body>
+</html>

@@ -63,3 +63,49 @@ Asi se veria en el servidor local:
 <img src="https://i.imgur.com/KO2Xk1E.jpg" width="100"/>
 
 Lectura recomendada: https://jinja.palletsprojects.com/en/3.1.x/
+
+
+## Estructuras de control
+
+La idea es crear una lista de frutas en la *aplicacion*, ya sabemos que la aplicacion es *main.py*, y que la mostraremos en la ruta *welcome*, siempre y cuando se cumpla la condicion. *¿Cual es esa condicion?* Lo explicare mas adelante.
+
+**¿Que es el contexto de la aplicacion?** Es un concepto en construcion, sin embargo cuando una aplicacion maneja muchas variables, es mejor crear un diccionario con los parametros que vamos a pasar, y posteriormente expandir el diccionario, con la notacion **context
+
+    @app.route('/hello')
+    def hello():
+        user_ip = request.cookies.get('user_ip')
+        context ={
+            'user_ip':user_ip,
+            'fruits':fruits,
+    }
+    return render_template('hello.html', **context )
+
+
+
+**En el template welcome**
+
+Se guarda la IP del Usuario en una Cookie en la ruta raiz, como se ha venido haciendo, y nos redirige a la ruta *welcome*. 
+
+De encontrarse la *user_ip* no la mostrara, seguido de la lista de frutas, aconcejo hacerlo con el tag *ul*. 
+
+¿Que es el *HTML tag* *ul*? An unordered HTML list. Es para que el Browser entienda que es una lista, y la usaremos para desplegar nuestra lista de frutas, si se cumple la condicion. 
+
+De no encontrarse la IP del usuario, desplegara un mensaje y un enlace hacia la raiz para intentar obtenerla.
+
+La haremos en el html:
+
+Para todos los templates, Flask pone a nuestra disposicion una variable que se llama url_for que nos permite encontrar la ruta especifica, con enviar el nombre de la funcion que pertenece a esta ruta.
+
+        {% if user_ip %}
+        <h3>Your IP is {{user_ip}}</h3>
+        <ul>
+            {% for fruit in fruits %}
+                <li>{{fruit}}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <a href="{{url_for('index')}}">Ir a inicio</a>
+            <h3>Cookie Not Found</h3>
+        {% endif %}
+
+Como vez index es la funcion que pertenece a la ruta raiz, y la que guarda la ip del usuario.
