@@ -1,5 +1,5 @@
-# se importa make_response, redirect
-from flask import Flask, request, make_response, redirect
+# se importa render_template
+from flask import Flask, request, make_response, redirect, render_template
 
 # se instancia un objeto de Flask, y se le da como parametro el nombre de la aplicacion que es main.py
 app = Flask(__name__)
@@ -22,7 +22,7 @@ def index():
 @app.route('/welcome')
 def welcome():
     user_ip = request.cookies.get('user_ip')
-    return f'Welcome your IP is: {user_ip}'        
+    return render_template('welcome.html', user_ip=user_ip)       
 
 
 if __name__ == '__main__':

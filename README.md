@@ -47,3 +47,19 @@ Para visualizar las cookies en EDGE hay que ir a herramientas de desarrollador d
 <img src="https://i.imgur.com/1J0WMvg.jpg" width="40%"/>
 
 Y dento de estra cruzecita buscar *Aplicacion*, y luego *Almacenamiento*
+
+## Templates con Jinja 2
+
+Un template es un archivo .html que permite renderiar informacion estatica y dinamica, para este caso podriamos pasar la informacion de la ip del usuario directamente al html, en lugar de regresarla como una cadena de texto.
+
+Vamos a crear un nuevo directorio llamado templates, e importa de la clase Flask el modulo render_template
+
+en la ruta hello, donde ahora en vez de retornar una cadena, retornamos el template: hello.html
+
+tambien enviamos la user_ip, y dentro del html, coloccamos doble corchete, para indicar es una variable
+
+Asi se veria en el servidor local:
+
+<img src="https://i.imgur.com/KO2Xk1E.jpg" width="100"/>
+
+Lectura recomendada: https://jinja.palletsprojects.com/en/3.1.x/
