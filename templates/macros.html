@@ -1,0 +1,6 @@
+<!--Renderiza una lista-->
+{% macro render_list(my_list)%}
+    {% for element in my_list %}
+        <li>{{element}}</li>
+    {% endfor %}   
+{% endmacro%}

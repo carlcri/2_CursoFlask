@@ -1,5 +1,6 @@
-<!-- se hereda del base.html -->
+<!-- se hereda del base.html e importamos macros -->
 {% extends 'base.html'%}
+{% import 'macros.html' as macros%}
 
 <!-- super() permite anadir esta parte al bloque de titulo sin sobreescribir lo que viene del base.html-->
 {% block title%}
@@ -12,10 +13,10 @@
 {% block content%}
 
     <h1>Consultas por Lenguaje:{{languaje}}</h1>
+    <h4> Esta lista fue renderizada usando Macros</h4>
+
     <ul>
-        {% for element in names %}
-            <li>{{element}}</li>
-        {% endfor %}   
+        {{macros.render_list(names)}}
     </ul>
 
     <a href="{{url_for('welcome')}}">Ir al home</a>

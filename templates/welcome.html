@@ -1,5 +1,7 @@
-<!-- se hereda del base.html -->
+<!-- se hereda del base.html e importamos macros-->
 {% extends 'base.html'%}
+{% import 'macros.html' as macros%}
+
 
 {% block title%}
     {{super()}}
@@ -13,10 +15,9 @@
     {% if user_ip %}
     <h3>Your IP is {{user_ip}}</h3>
     <h3>¿Cual es tu fruta favorita?</h3>
+    <h4> Esta lista fue renderizada usando Macros</h4>
     <ul>
-        {% for fruit in fruits %}
-            <li>{{fruit}}</li>
-        {% endfor %}   
+        {{macros.render_list(fruits)}}
     </ul>
 
     <a href="{{url_for('querries')}}">Ir a Consultas</a>
