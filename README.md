@@ -116,3 +116,41 @@ Como vez index es la funcion que pertenece a la ruta raiz, y la que guarda la ip
 Se realiza una busqueda estatica en *DataWorkers.py*, y se renderiza en la ruta *welcome*. Mira que se usa para la busqueda, funciones de orden superior-*high orfer functions*
 
 Cada vez que se refresque la pagina, mostrara una busqueda diferente.
+
+## Herencia de Templates: como incluir templates en otros templates
+
+ Muy util porque permite heredar y reutilizar codigo *html*. Lo primero es crear un archivo base.html el cual vamos a extender en todos nuestros templates. El base.html hay quue guardarlo en el folder *templates*, si Visual Studio Genera uno por defecto, guardarlo asi.
+
+ 1. El template *welcome.html* se deja con lo mas basico
+
+        {% extends 'base.html'%}: 
+        
+Sintaxis en Jinja para indicar que el template hereda o es hijo de base.html 👆
+
+Si colocacomos solo esta linea de codigo, y corremos el servidor, pues no nos va a mostrar nada. Porque FLAKS esta rendereando base.html, y cuando el buscador ve que termina el HTML, no rendera nada mas. 
+
+Entonces se haran modificaciones tanto en los templates de *consultas y welcome*, usando una estructura de bloques 
+
+Vamos tambien a familiarizarnos dicha estructura: en este caso un bloque de titulo, para la ventana que se genera, esto para el base.html. El simbolo *pipe* al lado de Coronapp es solo un separador. 
+
+    {% block title%}
+        Coronapp|
+    {% endblock%}
+
+Y este para el welcome.html
+
+    {% block title%}
+        welcome 
+    {% endblock%}
+
+En este caso si corremos el servidor Flask tal y como lo hemos venido haciendo, el bloque titulo en hello.html esta sobrescribiendo, pero nosostros lo que queremos es juntarlo. Necesitamos anadir, entre otras cosas, este statement, dentro del bloque. 
+
+    (super de superclase): {{super()}}
+
+Asi:
+
+    {% block title%}
+        {{super()}}
+        Consultas
+    {% endblock%}
+

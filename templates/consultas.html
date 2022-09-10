@@ -1,7 +1,22 @@
-<h1>Consultas por Lenguaje:{{languaje}}</h1>
+<!-- se hereda del base.html -->
+{% extends 'base.html'%}
 
-<ul>
-    {% for element in names %}
-        <li>{{element}}</li>
-    {% endfor %}   
-</ul>
+<!-- super() permite anadir esta parte al bloque de titulo sin sobreescribir lo que viene del base.html-->
+{% block title%}
+    {{super()}}
+    Consultas
+{% endblock%}
+
+
+<!-- Bloque content debe existir en base.html para que pueda renderiar el contenido-->
+{% block content%}
+
+    <h1>Consultas por Lenguaje:{{languaje}}</h1>
+    <ul>
+        {% for element in names %}
+            <li>{{element}}</li>
+        {% endfor %}   
+    </ul>
+
+    <a href="{{url_for('welcome')}}">Ir al home</a>
+{% endblock%}

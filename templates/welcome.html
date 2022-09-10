@@ -1,25 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
-</head>
-<body>
-    <h1>Welcome Page</h1>
+<!-- se hereda del base.html -->
+{% extends 'base.html'%}
+
+{% block title%}
+    {{super()}}
+    Home
+{% endblock%}
+
+
+<!-- Bloque content debe existir en base.html para que pueda renderiar el contenido-->
+{% block content%}
 
     {% if user_ip %}
-        <h3>Your IP is {{user_ip}}</h3>
-        <ul>
-            {% for fruit in fruits %}
-                <li>{{fruit}}</li>
-            {% endfor %}   
-        </ul>
-        <a href="{{url_for('querries')}}">Ir a Consultas</a>
+    <h3>Your IP is {{user_ip}}</h3>
+    <h3>¿Cual es tu fruta favorita?</h3>
+    <ul>
+        {% for fruit in fruits %}
+            <li>{{fruit}}</li>
+        {% endfor %}   
+    </ul>
+
+    <a href="{{url_for('querries')}}">Ir a Consultas</a>
     {% else %}
         <a href="{{url_for('index')}}">Ir a inicio</a>
         <h3>Cookie Not Found</h3>
     {% endif %}
-</body>
-</html>
+
+{% endblock%}
