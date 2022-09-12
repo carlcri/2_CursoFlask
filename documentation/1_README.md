@@ -74,3 +74,21 @@ Renderizar el logo de platzi, para que aparezca en la barra de navegacion. Modif
 
 
     <img src="{{url_for('static', filename='images/platzi.png')}}" alt="logo platzi">
+
+## Configurar paginas de error
+
+**Error 404**
+¿Como manejar particularmente el error 404 cuando un usuario va alguna ruta que la aplicacion desconoce? 
+
+Para que no aparezca como un error por defecto, vamos hacer uso la funcion de flask: *errorhandler*.
+
+Como vez, *error_handler* en vez de recibir una ruta, recibe un codigo de error. La funcion decorada, recibe el error como parametro. Y enviamos en el contexto el error.
+
+    @app.errorhandler(404)
+        def not_found(error):
+        return render_template('404.html', error=error)
+
+**Error 500**
+Error del servidor: lo simulamos con una ruta (/error), y lo manejamos en el main.py, casi igual con el error anterior.
+
+Desactiva el *modo debug* para poder realizar la practica.

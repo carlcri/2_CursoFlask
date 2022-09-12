@@ -1,0 +1,14 @@
+<!-- se hereda del base.html-->
+{% extends 'base.html'%}
+
+{% block title%}
+    {{super()}}
+    Server Error
+{% endblock%}
+
+{% block content%}
+    <h1>Error del Servidor</h1>
+    <p>
+        {{error}}
+    </p>
+{% endblock%}
