@@ -61,3 +61,65 @@ https://getbootstrap.com/docs/3.3/
 *Para actualizarse a Bootstrap 4 y 5*
 
 https://github.com/helloflask/bootstrap-flask/fork
+
+
+## Configuración de Flask
+
+Para activar el development mode debes escribir lo siguiente en la consola de WSL:
+
+    export FLASK_ENV=development
+    echo FLASK_ENV
+
+Realmente no vi la diferencia. Hay que revisar el tema.
+
+**Objeto Session**
+
+Ya utilizamos el objeto *request* para obtener la direccion IP del usuario, y guardarla en una *Cookie* en el Web Browser
+
+    user_ip = request.cookies.get('user_ip')
+
+Esto no es una buena practica de seguridad porque cualquiera podria copiarla o modificarla a su antojo(tu mismo lo puedes hacer en este momento y cambiar la IP por cualquier cosa)
+
+<img src="https://i.imgur.com/QkgC3AH.png" width="140%"/>
+
+### ¿Como solucionarlo?
+
+Hay otro objeto de Flask llamada *session* que se usa para guardar informacion del usuario de manera segura, y a continuacion mostrare porque.
+
+Entonces vamos a crear una llave secreta: Una propiedad del objeto app() que es recordemos es de la clase Flask
+
+Ahora en vez de guardar directamente la ip del usuario en una cookie, la vamos a guardar en una seccion. 
+
+1. Hay un atributo del objeto FLASK llamado *config*, recomiendo esta lectura. Y funciona como un diccionario. Lo usaremos para generar una llave secreta
+
+    app.config['SECRET_KEY'] = 'misecreto'
+
+2. Importamos el objeto *session*, y posteriormente guardamos la *user_ip* en el objeto. Finalmente, en la ruta *welcome* y con el metodo *get* lo consultamos y guardamos:
+
+
+        from flask import session
+        ...
+        ...
+        session['user_ip'] = user_ip
+        ...
+        ...
+        user_ip = session.get('user_ip')
+
+
+Se corre nuevamente la aplicacion, y encontramos que la informacion esta encriptada.
+
+<img src="https://i.imgur.com/dmXfgCa.png" width="100%"/>
+
+### Ademas se session y request, Flask tambien tiene otros dos objetos de interes:
+
+- session: storage que permanece entre cada request
+- request: informacion sobre la peticion que realiza el browser
+- current_app: la aplicacion actual
+- g: storage temporal, se reinicia en cada request - tambien es un diccionario
+
+
+Lecturas recomendada: 
+
+- https://flask.palletsprojects.com/en/1.1.x/config/ 
+- https://prettyprinted.com/tutorials/automatically_load_environment_variables_in_flask
+

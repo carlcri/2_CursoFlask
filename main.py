@@ -1,12 +1,15 @@
-# Se importa la clase Bootstrap
+# se importa seccion
 import random
 from flask import Flask, request, make_response, redirect, render_template
+from flask import session
 from data.DataWorkers import DATA, get_worker_by_languaje
 from flask_bootstrap import Bootstrap
 
-# se crea una instancia de Bootstrap y se le pasa como parametro una aplicacion de Flask
 app = Flask(__name__)
 bootstrap = Bootstrap(app=app)
+
+# Se hace uso del atributo config de FLASK para generar una llave secreta
+app.config['SECRET_KEY'] = 'misecreto'
 
 DEBUG = False
 PORT = 5000
@@ -14,20 +17,20 @@ PORT = 5000
 
 fruits = ['Banana', 'Apple', 'Orange', 'Cherry']
 
-# Ruta Raiz
+# Ruta Raiz- Se Guarda el user_ip en el objeto session
 @app.route('/')
 def index():
     user_ip = request.remote_addr
     response = make_response(redirect('/welcome'))
-    response.set_cookie('user_ip', user_ip)
+    session['user_ip'] = user_ip
     
     return response
 
 
-# Ruta Welcome
+# Ruta Welcome - Se obtiene la user_ip del objeto session
 @app.route('/welcome')
 def welcome():
-    user_ip = request.cookies.get('user_ip')
+    user_ip = session.get('user_ip')
     context = {'user_ip':user_ip,
                 'fruits':fruits,}
 
@@ -50,10 +53,12 @@ def querries():
 def not_found(error):
     return render_template('404.html', error=error)
 
+
 # Ruta para generar error
 @app.route('/error')
 def internal_error():
     1/0
+
 
 # Ruta Error Handler 500
 @app.errorhandler(500)
