@@ -1,13 +1,15 @@
-# Se importan los Datos y el metodo para consultarlos
+# Se importa la clase Bootstrap
 import random
 from flask import Flask, request, make_response, redirect, render_template
 from data.DataWorkers import DATA, get_worker_by_languaje
+from flask_bootstrap import Bootstrap
 
-# se instancia un objeto de Flask, y se le da como parametro el nombre de la aplicacion que es main.py
+# se crea una instancia de Bootstrap y se le pasa como parametro una aplicacion de Flask
 app = Flask(__name__)
+bootstrap = Bootstrap(app=app)
 
-#DEBUG = False
-#PORT = 5000
+DEBUG = False
+PORT = 5000
 
 
 fruits = ['Banana', 'Apple', 'Orange', 'Cherry']
@@ -59,5 +61,5 @@ def server_error(error):
     return render_template('500.html', error=error) 
 
 
-#if __name__ == '__main__':
-#    app.run(port=PORT, debug=DEBUG)
+if __name__ == '__main__':
+    app.run(port=PORT, debug=DEBUG)

@@ -92,3 +92,4 @@ Como vez, *error_handler* en vez de recibir una ruta, recibe un codigo de error.
 Error del servidor: lo simulamos con una ruta (/error), y lo manejamos en el main.py, casi igual con el error anterior.
 
 Desactiva el *modo debug* para poder realizar la practica.
+
