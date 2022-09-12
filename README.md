@@ -86,11 +86,11 @@ La idea es crear una lista de frutas en la *aplicacion*, ya sabemos que la aplic
 
 Se guarda la IP del Usuario en una Cookie en la ruta raiz, como se ha venido haciendo, y nos redirige a la ruta *welcome*. 
 
-De encontrarse la *user_ip* no la mostrara, seguido de la lista de frutas, aconcejo hacerlo con el tag *ul*. 
+De encontrarse la *user_ip* la mostrara, seguido de la lista de frutas, aconcejo hacerlo con el tag *ul*. 
 
 ¿Que es el *HTML tag* *ul*? An unordered HTML list. Es para que el Browser entienda que es una lista, y la usaremos para desplegar nuestra lista de frutas, si se cumple la condicion. 
 
-De no encontrarse la IP del usuario, desplegara un mensaje y un enlace hacia la raiz para intentar obtenerla.
+De NO encontrarse la IP del usuario, desplegara un mensaje y un enlace hacia la raiz para intentar obtenerla.
 
 La haremos en el html:
 

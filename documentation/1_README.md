@@ -36,5 +36,41 @@ Y lo vamos a incluir con este *stament*:
     {%include 'navbar.html'%}
 
 
+## Uso de archivos estáticos: imágenes
+
+Rendirazaremos una imagen de *ricky and Morthy* cuando no se encuentre la IP del usuario, y una segunda imagen en el *header* que sera un logo.
+
+Creamos un nuevo directorio *Static* y dentro de el otro: *images*. 
+
+En el template de *welcome.html* agregaremos esta linea de codigo:
+
+    <img src="{{url_for('static', filename='images/ricky.jpg')}}" alt="ricky">
+
+Se hace una referencia con *url_for* al archivo que se quiere cargar, en este caso, *url_for* en vez de la funcion de la ruta, apuntara al directorio *static*, y posteriormente el archivo.
+
+Al renderizar la imagen, la muestra, sin embargo, muchas veces los archivos staticos se quedan guardados en el cache del browser, por lo que se recomienda, con un **HARD RELOAD** que va a depender del navegador usado. Para EDGE: 
+
+    CTRL + F5
+
+o
+
+    (CTRL) + Fn + F5 on your keyboard.
+
+Como la imagen esta un poco grande, y se quiere modificar su tamaño, se puede hacer mediante un archivo *.css*.
+
+El main.css esta en el subdirectorio static/css/
+
+    img{
+    max-width: 30px;
+    }
+
+Y dentro de *base.html* en el *head*, con un tag de link, se hace referencia al base.html
+
+    <link rel='stylesheet' href="{{ url_for('static', filename='css/main.css')}}">
+
+**Ejercicio**
+
+Renderizar el logo de platzi, para que aparezca en la barra de navegacion. Modificar *navbar.html*:
 
 
+    <img src="{{url_for('static', filename='images/platzi.png')}}" alt="logo platzi">

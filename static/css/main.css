@@ -1,0 +1,8 @@
+/*todos los tags que sean iguales a img*/ 
+img{
+    max-width: 30px;
+}
+
+html * {
+    font-family: sans-serif;
+}

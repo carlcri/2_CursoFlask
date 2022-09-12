@@ -13,17 +13,18 @@
 {% block content%}
 
     {% if user_ip %}
-    <h3>Your IP is {{user_ip}}</h3>
-    <h3>¿Cual es tu fruta favorita?</h3>
-    <h4> Esta lista fue renderizada usando Macros</h4>
-    <ul>
+        <h3>Your IP is {{user_ip}}</h3>
+        <h3>¿Cual es tu fruta favorita?</h3>
+        <h4> Esta lista fue renderizada usando Macros</h4>
+        <ul>
         {{macros.render_list(fruits)}}
-    </ul>
+        </ul>
 
-    <a href="{{url_for('querries')}}">Ir a Consultas</a>
+        <a href="{{url_for('querries')}}">Ir a Consultas</a>
     {% else %}
         <a href="{{url_for('index')}}">Ir a inicio</a>
         <h3>Cookie Not Found</h3>
+        <img src="{{url_for('static', filename='images/ricky.jpg')}}" alt="ricky">
     {% endif %}
 
 {% endblock%}
