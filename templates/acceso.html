@@ -1,0 +1,14 @@
+<!-- se hereda del base.html-->
+{% extends 'base.html'%}
+
+{% import 'bootstrap/wtf.html' as wtf%}
+
+{% block title%}
+    {{super()}}
+    Acceso
+{% endblock%}
+
+{% block content%}
+    <h1>Ingreso</h1>
+    {{wtf.quick_form(loginform)}}
+{% endblock%}

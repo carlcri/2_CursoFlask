@@ -1,9 +1,19 @@
-# se importa seccion
+# importamos Flaskform, PasswordField, StringField y SubmitField
 import random
 from flask import Flask, request, make_response, redirect, render_template
 from flask import session
 from data.DataWorkers import DATA, get_worker_by_languaje
 from flask_bootstrap import Bootstrap
+from flask_wtf import FlaskForm
+from wtforms.fields import PasswordField, StringField, SubmitField
+
+# extendemos la clase FlaskForm. Lo que esta entre parentesis se concoce como etiquetas
+class LoginForm(FlaskForm):
+    username = StringField('Nombre de Usuario')
+    password = PasswordField('contraseña')
+    submit = SubmitField('Enviar')
+
+
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app=app)
@@ -46,6 +56,15 @@ def querries():
                'languaje':languaje,}
 
     return render_template('consultas.html', **context)
+
+
+@app.route('/acceso')
+def login():
+    # se instancia un objeto de clase LoginForm
+    loginform = LoginForm()
+    context = {'loginform':loginform}
+
+    return render_template('acceso.html', **context)
 
 
 # Ruta Error Handler 404 

@@ -123,3 +123,49 @@ Lecturas recomendada:
 - https://flask.palletsprojects.com/en/1.1.x/config/ 
 - https://prettyprinted.com/tutorials/automatically_load_environment_variables_in_flask
 
+## Implementacion de Flask-Bootstrap y Flask-WTF
+
+Si queremos que el usuario pueda enviar informacion a nuestra aplicacion WEB, esto se hace mediante una forma. *Flask-WTF* es una extension que ayuda a integrar WTF en Flask. Dentro del requirements.txt, anadir una entrada:
+
+    flask-wtf
+
+Despues de instalarlo, lo importamos al *main.py*:
+
+    from flask_wtf import FlaskForm
+
+Tambien necesitamos los fields:
+
+    from wtforms.fields import PasswordField, StringField
+
+**RETO1**
+
+Crear una forma para que enviar el usuario y la contraseña en una nueva ruta que se llamara *login*. Se necesita un boton de *enviar*
+
+1. Declaramos una clase que usaremos mas adelante que extiende o hereda de FlaskForm, con dos campos, que por ahora no lo vamos a usar pero enventualmente los vamos a necesitar, lo que esta entre parentesis se conoce como etiqueta.
+
+        class LoginForm(FlaskForm):
+            username = StringField('Nombre de Usuario')
+            password = PasswordField('contraseña')
+            submit = SubmitField('Enviar')
+
+2. Creamos la ruta en el main, y enviamos en el contexto el loginform
+
+        @app.route('/acceso')
+        def login():
+            # se instancia un objeto de clase LoginForm
+            loginform = LoginForm()
+            context = {'loginform':loginform}
+
+            return render_template('acceso.html', **context)
+
+3. La forma mas sencilla para renderizar la forma es usar Bootstrap en *acceso.html*, asi que lo importamos, y lo incluimos en el bloque de contenido:
+
+        {% import 'bootstrap/wtf.html' as wtf%}
+        ...
+        ...
+        {{wtf.quick_form(loginform)}}
+
+### Y este es el resultado:
+
+<img src="https://i.imgur.com/87h2nKu.jpg" width="65%"/>
+
