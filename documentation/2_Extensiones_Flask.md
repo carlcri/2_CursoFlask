@@ -241,3 +241,21 @@ Y dentro definiremos la funcion *create_app*
 Probamos la aplicacion, y el funciona como lo venia haciendo. 
 
 En la siguiente implementacion, haremos uso del archivo *config.py* para guardar la llave secreta.
+
+## APP Factory Parte 2
+
+Creamos una clase en el archivo *config.py* para guardar la llave secreta. Donde SECRET_KEY es un aributo de la misma.
+
+        class Config:
+            SECRET_KEY = 'misecreto'
+
+MOdificamos el archivo **__init__.py**; importamos la clase; y modificamos el atributo *config* del objeto FLASK
+
+        from .config import Config
+        ...
+        ...
+        app.config.from_object(Config)
+
+**Lectura Recomendada**
+
+https://flask.palletsprojects.com/en/1.1.x/config/
