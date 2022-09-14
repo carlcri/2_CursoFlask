@@ -195,3 +195,49 @@ Tambien se necesita colocar la clase LoginForm en un nuevo archivo.
 Ahora ya no se podra enviar la forma vacia, y queda dentro de un container
 
 4. En la siguiente seccion, vamos a mover la clase donde tiene que estar, y desde ahi la vamos a importar.
+
+## App Factory
+
+Tal como lo prometi, vamos a mover la *clase* y nos adelantaremos un poco a la seccion de *App factory*
+
+**¿Que es App Factory? **
+Es simplemente una funcion que regresa la nueva app. Y para ello se cambiara substancialmente la estructura de la aplicacion.
+
+Los cuadros azules representan carpetas y las figuras amarillas son los archivos
+
+<img src="https://i.imgur.com/J0Cy9gj.png" width="100%"/>
+
+1. Se crea un nuevo directorio en la raiz llamado *app*, y dentro un archivo llamado 
+
+        __init__.py
+
+Y dentro definiremos la funcion *create_app*
+
+        def create_app():
+            app = Flask(__name__)
+            bootstrap = Bootstrap(app=app)
+
+            # Se hace uso del atributo config de FLASK para generar una llave secreta
+            app.config['SECRET_KEY'] = 'misecreto'
+
+            return app
+
+2. Llamar a la funcion en *main.py*, y crear una instancia de la aplicacion, o para que me entienda crearla.
+
+        from app.auth import create_app
+        ...
+        ...
+        app = create_app()
+
+3. Mover los directorios *static* y *templates* al directorio *app* que es donde la app los va a buscar.         
+
+4. Probamos la aplicacion, y perfecto, ¡Felicitaciones! Faltan algunas tareas
+
+5. Mover la forma a un nuevo archivo llamado *forms.py* e importarla en el *main*
+
+        from app.forms import LoginForm
+
+
+Probamos la aplicacion, y el funciona como lo venia haciendo. 
+
+En la siguiente implementacion, haremos uso del archivo *config.py* para guardar la llave secreta.

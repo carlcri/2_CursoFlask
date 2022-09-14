@@ -1,32 +1,18 @@
-# importamos Flaskform, PasswordField, StringField y SubmitField, 
-# y el validador DataRequired
 import random
 from flask import Flask, request, make_response, redirect, render_template
 from flask import session
 from data.DataWorkers import DATA, get_worker_by_languaje
 from flask_bootstrap import Bootstrap
-from flask_wtf import FlaskForm
-from wtforms.fields import PasswordField, StringField, SubmitField
-from wtforms.validators import DataRequired
 
+# importamos la funcion para crear la aplicacion y la forma
+from app import create_app
+from app.forms import LoginForm
 
-# extendemos la clase FlaskForm. Lo que esta entre parentesis se concoce como etiquetas
-# Se integra el validador DataRequired
-class LoginForm(FlaskForm):
-    username = StringField('Nombre de Usuario', validators=[DataRequired()])
-    password = PasswordField('contraseña', validators=[DataRequired()])
-    submit = SubmitField('Enviar')
+# Se crea la app
+app = create_app()
 
-
-
-app = Flask(__name__)
-bootstrap = Bootstrap(app=app)
-
-# Se hace uso del atributo config de FLASK para generar una llave secreta
-app.config['SECRET_KEY'] = 'misecreto'
-
-DEBUG = False
-PORT = 5000
+#DEBUG = False
+#PORT = 5000
 
 
 fruits = ['Banana', 'Apple', 'Orange', 'Cherry']
@@ -89,5 +75,5 @@ def server_error(error):
     return render_template('500.html', error=error) 
 
 
-if __name__ == '__main__':
-    app.run(port=PORT, debug=DEBUG)
+#if __name__ == '__main__':
+#    app.run(port=PORT, debug=DEBUG)
