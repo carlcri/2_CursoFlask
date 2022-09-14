@@ -8,7 +8,10 @@
     Acceso
 {% endblock%}
 
+<!-- renderizar loginform-->
 {% block content%}
     <h1>Ingreso</h1>
-    {{wtf.quick_form(loginform)}}
+    <div class="container">
+        {{wtf.quick_form(loginform)}}            
+    </div>
 {% endblock%}

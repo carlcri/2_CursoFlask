@@ -169,3 +169,29 @@ Crear una forma para que enviar el usuario y la contraseña en una nueva ruta qu
 
 <img src="https://i.imgur.com/87h2nKu.jpg" width="65%"/>
 
+**Reto2**
+
+Mejorar la version anterior para que valide y no se envie la forma vacia, y un poco el aspecto de la *forma*.
+Tambien se necesita colocar la clase LoginForm en un nuevo archivo.
+
+1. Para que no se envie la forma vacia, se necesita usar un validador que se llama *DataRequired*
+
+        from wtforms.validators import DataRequired
+
+2. Integrar los validadores a la clase. *validators* recibe como parametro una lista de validadores, es importante que se pase una nueva instancia del validador por eso *DataRequired()* tiene esos parentesis.
+
+        class LoginForm(FlaskForm):
+            username = StringField('Nombre de Usuario', validators=[DataRequired()])
+            password = PasswordField('contraseña', validators=[DataRequired()])
+            submit = SubmitField('Enviar')
+
+
+3. Dentro de un tag *div* que va a ser de clase *container*, dicha clase viene de Bootstrap.
+
+### Y este es el resultado:
+
+<img src="https://i.imgur.com/Ysgxj8q.jpg" width="65%"/>
+
+Ahora ya no se podra enviar la forma vacia, y queda dentro de un container
+
+4. En la siguiente seccion, vamos a mover la clase donde tiene que estar, y desde ahi la vamos a importar.

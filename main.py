@@ -1,4 +1,5 @@
-# importamos Flaskform, PasswordField, StringField y SubmitField
+# importamos Flaskform, PasswordField, StringField y SubmitField, 
+# y el validador DataRequired
 import random
 from flask import Flask, request, make_response, redirect, render_template
 from flask import session
@@ -6,11 +7,14 @@ from data.DataWorkers import DATA, get_worker_by_languaje
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
 from wtforms.fields import PasswordField, StringField, SubmitField
+from wtforms.validators import DataRequired
+
 
 # extendemos la clase FlaskForm. Lo que esta entre parentesis se concoce como etiquetas
+# Se integra el validador DataRequired
 class LoginForm(FlaskForm):
-    username = StringField('Nombre de Usuario')
-    password = PasswordField('contraseña')
+    username = StringField('Nombre de Usuario', validators=[DataRequired()])
+    password = PasswordField('contraseña', validators=[DataRequired()])
     submit = SubmitField('Enviar')
 
 
@@ -57,7 +61,7 @@ def querries():
 
     return render_template('consultas.html', **context)
 
-
+# Ruta Acceso
 @app.route('/acceso')
 def login():
     # se instancia un objeto de clase LoginForm
