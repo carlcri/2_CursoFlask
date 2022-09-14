@@ -11,8 +11,8 @@ from app.forms import LoginForm
 # Se crea la app
 app = create_app()
 
-#DEBUG = False
-#PORT = 5000
+DEBUG = False
+PORT = 5000
 
 
 fruits = ['Banana', 'Apple', 'Orange', 'Cherry']
@@ -47,12 +47,24 @@ def querries():
 
     return render_template('consultas.html', **context)
 
+
 # Ruta Acceso
-@app.route('/acceso')
+@app.route('/acceso', methods=['GET','POST'])
 def login():
-    # se instancia un objeto de clase LoginForm
+    
     loginform = LoginForm()
-    context = {'loginform':loginform}
+    username = session.get('username')
+
+
+    context = {'loginform':loginform,
+                'username':username,}
+
+
+    # se valida la forma y se obtiene el username
+    if loginform.validate_on_submit():
+        username = loginform.username.data
+        session['username'] = username
+
 
     return render_template('acceso.html', **context)
 
@@ -75,5 +87,5 @@ def server_error(error):
     return render_template('500.html', error=error) 
 
 
-#if __name__ == '__main__':
-#    app.run(port=PORT, debug=DEBUG)
+if __name__ == '__main__':
+    app.run(port=PORT, debug=DEBUG)

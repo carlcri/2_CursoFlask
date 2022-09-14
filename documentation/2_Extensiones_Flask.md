@@ -259,3 +259,57 @@ MOdificamos el archivo **__init__.py**; importamos la clase; y modificamos el at
 **Lectura Recomendada**
 
 https://flask.palletsprojects.com/en/1.1.x/config/
+
+## Uso de Metodo Post en Flask-WTF
+Si intentamos enviar la forma, saldra un error:
+
+    Method Not Allowed
+    The method is not allowed for the requested URL.
+
+Es decir que hay un metodo que no esta permitido en esa ruta.
+
+**Metodo GET and POST**
+
+GET y POST son dos técnicas eficientes que pueden enviar los datos a un servidor o navegador y necesariamente que estos se comuniquen. Los dos métodos son distintos cuando el método GET añade los datos codificados a la URI, mientras que en el caso del método POST los datos se añaden al cuerpo y no a la URI. Además, se utiliza el método GET para recuperar los datos. Por el contrario, el método POST se utiliza para almacenar o actualizar los datos.
+
+Cuando enviamos un POST como es el caso, no esta habilitado, y eso es lo que esta pasando. Mientras que *GET* esta habilitado por defecto, *POST* tiene que ser habilitado en la ruta manualmente, debemos habilitarlos al mismo tiempo.
+
+Vamos agregar un parametro que es una lista de los metodos permitidos, en la ruta donde se hace uso de la forma.
+
+    @app.route('/acceso', methods=['GET', 'POST'])
+    def login():
+
+Vuelve a correr el servidor, y al intentar enviar la forma, ya no dara error, pero simplemente no hara nada mas.
+
+### Procesar la Forma para obtener los datos de la misma
+
+La idea es obtener el *username* de la forma,  
+
+Cuando nos hagen un *GET* se renderiza el formulario, pero cuando nos hagan un *POST* validamos que sea valido, y si asi lo es, obtenemos el *user_name*.
+
+- Hacer uso del metodo *validate_on_submit()* de *FlaskForm*: *"And the convenient validate_on_submit will check if it is a POST request and if it is valid."*. Y obtenemos el *username* y lo guardamos en la session
+
+        if loginform.validate_on_submit():
+            username = loginform.username.data
+            session['username'] = username
+
+
+Recuerda obtenerlo de la session y enviarlo al contexto.
+
+            username = session.get('username')
+
+            context = {'loginform':loginform,
+                'username':username,}
+
+
+Para probar, en la misma ruta,  y dentro del template *acceso.html*, y haciendo uso del contexto de la aplicacion, mostramos el *username*
+
+            {% if username%}
+                 <h2>Bienvenido {{username}}</h2>
+            {% endif%}
+
+Nota, que tienes que enviar dos veces para que tome los cambios. 
+
+<img src="https://i.imgur.com/SksH6DI.jpg" width="65%"/>
+
+Sin embargo la logica del negocio, esta un poco extraña, porque lo mas logica seria que el usuario ingresara y lo llevara a otra ruta. En la siguiente haremos mejorar y actualizaciones.

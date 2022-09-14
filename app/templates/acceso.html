@@ -11,6 +11,11 @@
 <!-- renderizar loginform-->
 {% block content%}
     <h1>Ingreso</h1>
+
+    {% if username%}
+        <h2>Bienvenido {{username}}</h2>
+    {% endif%}
+
     <div class="container">
         {{wtf.quick_form(loginform)}}            
     </div>
