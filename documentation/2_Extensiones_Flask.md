@@ -313,3 +313,47 @@ Nota, que tienes que enviar dos veces para que tome los cambios.
 <img src="https://i.imgur.com/SksH6DI.jpg" width="65%"/>
 
 Sin embargo la logica del negocio, esta un poco extraña, porque lo mas logica seria que el usuario ingresara y lo llevara a otra ruta. En la siguiente haremos mejorar y actualizaciones.
+
+## Mejorando la logia del negocio con GET and POST
+
+Requerimientos: Que solo se pueda acceder a la ruta de consultas, siempre y cuando se haya identificado. Que me muestre la ruta de consultas mi nombre de usuario y siempre en mayusculas, y ojala en un container.
+
+- importamos *url_for*, y retornamos la ruta. 
+
+        from flask import Flask url_for
+        ...
+        ...
+        return redirect(url_for('querries'))
+
+- Quitamos del navbar.html la opcion de consultas. **Ya no va** 👇
+
+        return redirect(url_for('querries'))     
+
+- Modificar la ruta de consultas, y obtener el *username* de *session* y enviarlo al contexto:
+
+        username = session.get('username')
+        ...
+        ...
+            context = {'names':names,
+               'languaje':languaje,
+               'username':username,}
+
+- Modificar el template de consultas para renderizar el *username*
+
+        {% if username%}
+            <h2>Bienvenido {{username}}</h2>
+        {% endif%}
+
+- Para que muestre siempre en mayusculas. Las variables que colocamos en doble corchete, tambien tienen filtros, y uno de ellos es *capitalize*, *upper* *lower*, entre otros, recomiendo esta lectura para profundizar:
+
+https://www.codestudyblog.com/cnb/0624164113.html
+
+        <h2>Bienvenido {{username | upper}}</h2>
+
+- Dentro de un tag *div* de clase *container*, colocamos el codigo para qye muestre como una cajita.
+
+        {% if username%}
+            <div class="container">
+                <h2>Bienvenido {{username | upper}}</h2>   
+            </div>
+        {% endif%}

@@ -9,12 +9,19 @@
 {% endblock%}
 
 
-<!-- Bloque content debe existir en base.html para que pueda renderiar el contenido-->
+<!-- Despliega el username una vez se haya logeado-->
 {% block content%}
 
-    <h1>Consultas por Lenguaje:{{languaje}}</h1>
-    <h4> Esta lista fue renderizada usando Macros</h4>
+    <h2>Consultas por Lenguaje:{{languaje}}</h2>
 
+    {% if username%}
+        <div class="container">
+            <h2>Bienvenido {{username | upper}}</h2>   
+        </div>
+    {% endif%}
+
+
+    <h4> Esta lista fue renderizada usando Macros</h4>
     <ul>
         {{macros.render_list(names)}}
     </ul>
