@@ -357,3 +357,55 @@ https://www.codestudyblog.com/cnb/0624164113.html
                 <h2>Bienvenido {{username | upper}}</h2>   
             </div>
         {% endif%}
+
+## Desplegar Flashes (mensajes emergentes)
+
+Es un banner que aparece abajo de la barra de navegacion. Estos mensajes son de informacion o ayuda al usuario, pueden ser de exito, fallo, o warning. Lo primero es importar:
+
+    from flask import flash
+
+1. Enviar el Flash: se debe importar *flash* de *flask*, y definir el mensaje, esto ultimo ira en la ruta login. y ahora la pregunta es ¿Como y en donde renderizar estos *flashes* en el *html?*
+
+        from flask import flash
+        ...
+        ...
+        flash('Username registrado con exito')
+
+2. Vamos ahora a renderar los flashes en el html, modificamos el *base.html* porque queremos que los flashes se renderizen en cualquier pagina.
+
+        <!-- renderizar flashes-->    
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-success alert-dismissible">
+                <!--Se coloca un boton que permitira cerrar el flash, data-dismiss permitira cerrar la alerta-->
+                <button type="button" 
+                        data-dismiss="alert"
+                        class="close">&times;</button>
+                {{message}}
+            </div>
+        {% endfor %}
+
+
+El codigo anterior, se coloco dentro del *block body* despues del *block navbar*. Para probar el codigo, corremos el servidor, vamos a *acceso* y posteriormente nos saldra un mensaje de *Username registrado con exito*
+
+<img src="https://i.imgur.com/GVTZIxe.jpg" width="75%"/>
+
+Sin embargo el mensaje anterior no se podra cerrar. Por Ahora solo voy a explicar el codigo anterior.
+
+Un ciclo for 
+
+- Dentro de un tag div usaremos tres clases: *alert*, *alert-success* y *alert-dismissible*, estas clases vienen de *Bootstrap*
+
+- Dentro del tag *div* colocaremos un boton que permitira cerrar el flash. La propiedad *data-dismiss*, que tambien viene de *bootstrap*, permitira cerrar la alerta. 
+
+- Se agregara la clase *close* y agregaremos una *x* que es *&times*
+
+
+3. Falta agregar los scripts de *javascript*, iran en la parte de abajo del *body*
+
+        <!-- importa los archivos javascript de bootstrap, y hereda, sin esto no se puede cerrar los flashes-->
+        {% block scripts %}
+            {{super()}}
+        {% endblock%}
+
+*Mas informacion:*
+https://flask.palletsprojects.com/en/1.0.x/patterns/flashing/
