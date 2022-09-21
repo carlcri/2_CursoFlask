@@ -23,13 +23,13 @@
 
     <!-- renderizar flashes-->    
     {% for message in get_flashed_messages() %}
-        <div class="alert alert-success alert-dismissible">
+        <div class="alert alert-info alert-dismissible">
             <!--Se coloca un boton que permitira cerrar el flash, data-dismiss permitira cerrar la alerta-->
             <button type="button" 
                     data-dismiss="alert"
                     class="close">&times;
             </button>
-            {{message}}
+            {{message}} - {{username | capitalize}}
         </div>
     {% endfor %}
 

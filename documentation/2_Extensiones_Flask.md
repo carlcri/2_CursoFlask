@@ -409,3 +409,28 @@ Un ciclo for
 
 *Mas informacion:*
 https://flask.palletsprojects.com/en/1.0.x/patterns/flashing/
+
+## Continuando con los Flashes
+
+Digamos que *Bootstrap* tiene diferentes opciones de como mostrar las alertas. En este caso cambie para que la alerta fuera de tipo informacion:
+
+Esto:
+
+    <div class="alert alert-success alert-dismissible">
+
+Por esto:
+
+    <div class="alert alert-info alert-dismissible">
+
+### Caso de negocio
+
+Suponga se necesita el Flask Emergente muestre un mensaje personalizado, y el nombre del usuario, con la primera letra en mayuscula. Modifico en el *base.html*
+
+    {{message}} - {{username | capitalize}}    
+
+#### Mas informacion
+
+https://www.youtube.com/watch?v=abCSKRMGZ3A
+
+https://getbootstrap.com/docs/4.0/components/alerts/
+
